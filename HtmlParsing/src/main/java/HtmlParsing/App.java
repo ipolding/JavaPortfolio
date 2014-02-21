@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -38,9 +39,28 @@ public class App
         }
     }
 
-    private void generateCsv(List book_title){
+    private void generateCsv(List strings, String[] columnHeaders){
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("C:/tutorial/javaTutorials/HtmlParsing/src/main/resources/tmp/output.txt");
+
+            for (String header: columnHeaders){
+                fileWriter.append(header);
+            }
+            fileWriter.append("\n");
+
+            for (int i = 0; i < strings.size(); i += columnHeaders.length) {
+                int x = 0;
+                while (x < columnHeaders.length)
+                {fileWriter.append((String)strings.get(x));
+                    x++;
+                }
+                fileWriter.append("\n");
+            }
 
 
+        } catch (IOException ex)
+        {ex.printStackTrace();}
 
     }
 
