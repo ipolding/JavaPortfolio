@@ -15,6 +15,17 @@ import java.util.Random;
 import java.io.File;
 import java.io.IOException;
 
+/* I need to use the following code:
+
+        for Element element : element tree {
+            if element is h2 AND element.nextSibling == ul
+        
+        }
+
+
+*/
+
+
 public class HtmlListConverter
 {
 
