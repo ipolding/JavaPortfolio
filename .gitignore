@@ -4,3 +4,5 @@
 *.jar
 *.war
 *.ear
+music-scrape/.idea/
+*.iml
