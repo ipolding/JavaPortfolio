@@ -24,15 +24,15 @@ public class WikiMediaScraper  {
 	private static final String API_ENTRY_POINT = "http://en.wikipedia.org/w/api.php?";
 	private static final String REV_XPATH = "//rev";
 		
-	public static final Pattern INFOBOX_REGEX = Pattern.compile("\\{\\{infobox.*\\}\\}");
-	
+//	public static final Pattern INFOBOX_REGEX = Pattern.compile("(?<=infobox )(.*?)");
+	public static final Pattern INFOBOX_REGEX = Pattern.compile("i");
 	
 	public String getInfobox(Source source) {		
 		return getInfoboxString(getRevNodeText(source));
 	}
 	
 	
-	private String getInfoboxString(String input) {
+	public String getInfoboxString(String input) {
 		Matcher matcher = INFOBOX_REGEX.matcher(input);
 		return matcher.group();	
 		
@@ -46,7 +46,7 @@ public class WikiMediaScraper  {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	private String getRevNodeText(Source source) {
+	public String getRevNodeText(Source source) {
 		
 		return xpathTemplate.evaluateAsString(REV_XPATH, source);
 		
@@ -65,13 +65,6 @@ public class WikiMediaScraper  {
 
 		}
 	
-	public String getStringInfoboxResult(String url) {
-		url = url + "&format=xml";
-		LOGGER.info(url);
-		return restTemplate.getForObject(url, String.class, "0", "10");
-
-		}
-
 	public String createURL(String band, String format) {
 		String url = API_ENTRY_POINT;
 
